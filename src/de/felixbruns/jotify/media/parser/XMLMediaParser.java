@@ -661,6 +661,9 @@ public class XMLMediaParser extends XMLParser implements XMLStreamConstants {
 			else if(name.equals("external-ids")){
 				track.setExternalIds(parseExternalIds());
 			}
+			else if(name.equals("alternatives")){
+				track.setAlternatives(parseTracks());
+			}
 			else{
 				throw new XMLParserException(
 					"Unexpected element '<" + name + ">'", this.reader.getLocation()
@@ -980,8 +983,8 @@ public class XMLMediaParser extends XMLParser implements XMLStreamConstants {
 	 */
 	public static Result parseResult(byte[] xml, String encoding){
 		Object result = parse(xml, encoding);
-		
-		if(result instanceof Result){
+
+        if(result instanceof Result){
 			return (Result)result;
 		}
 		
